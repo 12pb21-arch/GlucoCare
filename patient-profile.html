@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GlucoCare Patient Home</title>
+    <link rel="stylesheet" href="./styles.css" />
+    
+</head>
+<body>
+  <main class="shell">
+    <header class="site-header">
+      <a href="./index.html" class="brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+
+      <nav class="nav-list" id="navMenu">
+        <a href="./patient-profile.html" class="active">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+
+      <button class="header-action" type="button">Message Doctor</button>
+      <button class="menu-toggle" id="menuToggle">
+        ☰
+      </button>
+    </header>
+
+    <section class="content">
+      <!-- Care Overview Banner -->
+      <section class="care-banner">
+        <div class="care-banner-copy">
+          <p class="eyebrow">Care Overview</p>
+          <h2>Every patient, one clear picture</h2>
+          <p>Track glucose and blood pressure trends across all your patients, spot what needs attention, and keep every record ready for review.</p>
+        </div>
+        <img src="./new images/sugar-check.png" alt="Checking blood sugar" class="care-banner-img" />
+      </section>
+
+      <!-- Patient Profiles Header & Stats -->
+      <header class="profiles-topbar">
+        <div>
+          <h1>Patient Profiles</h1>
+          <p class="subtitle">Track sugar levels, blood pressure, and health history for each patient.</p>
+          
+          <div class="stats-row">
+            <span class="stat-pill"><span class="dot blue"></span>Total Patients: <strong>2</strong></span>
+            <span class="stat-pill"><span class="dot green"></span>Records Today: <strong>1</strong></span>
+          </div>
+        </div>
+        <button class="primary-action add-patient-btn">+ Add Patient</button>
+      </header>
+
+      <!-- Profiles Grid -->
+      <div class="multi-profile-grid">
+        
+        <!-- Patient 1: Ravinder -->
+        <article class="multi-profile-card">
+          <header class="card-header">
+            <div class="patient-identity">
+              <span class="avatar blue">SR</span>
+              <div class="patient-name">
+                <strong>Sh. Ravinder Kumar Bhardwaj</strong>
+                <div class="badges-row">
+                  <span class="info-badge">🎂 58 yrs</span>
+                  <span class="info-badge">♂ Male</span>
+                  <span class="info-badge">⚖ 70 kg</span>
+                  <span class="info-badge">🩸 O+</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="icon-btn edit" title="Edit">✎</button>
+              <button class="icon-btn delete" title="Delete">🗑</button>
+            </div>
+          </header>
+          
+          <div class="patient-history">
+            <span class="history-label">HISTORY</span>
+            <p>Type 2 Diabetes, BP, Kidney awaited.</p>
+          </div>
+
+          <div class="records-section">
+            <div class="records-header">
+              <h3>📋 Daily Health Records <span>(5 entries)</span></h3>
+              <button class="small-action-btn add-record-btn">+ Add Record</button>
+            </div>
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>🩸 SUGAR (MG/DL)</th>
+                  <th>♥ BLOOD PRESSURE (MMHG)</th>
+                </tr>
+                <tr class="sub-headers">
+                  <th>DATE</th>
+                  <th>FASTING</th>
+                  <th>AFTER BREAKFAST</th>
+                  <th>MORNING</th>
+                  <th>EVENING</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>26 Jun 2026</td>
+                  <td class="high">152</td>
+                  <td class="empty">—</td>
+                  <td class="empty">—</td>
+                  <td class="empty">—</td>
+                </tr>
+                <tr>
+                  <td>25 Jun 2026</td>
+                  <td class="high">200</td>
+                  <td class="empty">—</td>
+                  <td class="empty">—</td>
+                  <td class="empty">—</td>
+                </tr>
+                <tr>
+                  <td>22 Jun 2026</td>
+                  <td class="warning">111</td>
+                  <td class="empty">—</td>
+                  <td>148/80</td>
+                  <td class="empty">—</td>
+                </tr>
+                <tr>
+                  <td>18 Jan 2026</td>
+                  <td class="high">152</td>
+                  <td class="empty">—</td>
+                  <td class="high-bp">160/91</td>
+                  <td class="empty">—</td>
+                </tr>
+                <tr>
+                  <td>11 Jan 2026</td>
+                  <td class="high">220</td>
+                  <td class="empty">—</td>
+                  <td>141/83</td>
+                  <td class="empty">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Patient 2: Anil -->
+        <article class="multi-profile-card">
+          <header class="card-header">
+            <div class="patient-identity">
+              <span class="avatar blue">SA</span>
+              <div class="patient-name">
+                <strong>Sh. Anil Kumar Sharma</strong>
+                <div class="badges-row">
+                  <span class="info-badge">🎂 56 yrs</span>
+                  <span class="info-badge">♂ Male</span>
+                  <span class="info-badge">⚖ 75 kg</span>
+                  <span class="info-badge">🩸 B+</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="icon-btn edit" title="Edit">✎</button>
+              <button class="icon-btn delete" title="Delete">🗑</button>
+            </div>
+          </header>
+          
+          <div class="patient-history">
+            <span class="history-label">HISTORY</span>
+            <p>Paralysed attack, type 2 diabetes.</p>
+          </div>
+
+          <div class="records-section">
+            <div class="records-header">
+              <h3>📋 Daily Health Records <span>(0 entries)</span></h3>
+              <button class="small-action-btn add-record-btn">+ Add Record</button>
+            </div>
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>DATE</th>
+                  <th>🩸 SUGAR (MG/DL)</th>
+                  <th>♥ BLOOD PRESSURE (MMHG)</th>
+                </tr>
+                <tr class="sub-headers">
+                  <th>DATE</th>
+                  <th>FASTING</th>
+                  <th>AFTER BREAKFAST</th>
+                  <th>MORNING</th>
+                  <th>EVENING</th>
+                </tr>
+              </thead>
+            </table>
+            <div class="empty-records">
+              <p>No records yet — click "Add Record" to begin tracking.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a href="./index.html" class="footer-brand">
+          <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+          <div>
+            <strong>GlucoCare</strong>
+            <span>Patient Record</span>
+          </div>
+        </a>
+        <nav class="footer-nav">
+          <a href="./patient-profile.html">Patient Profile</a>
+          <a href="./diet-plan.html">Diet Plan</a>
+          <a href="./daily-routine.html">Daily Routine</a>
+          <a href="./specialists-list.html">Specialists List</a>
+        </nav>
+        <p class="footer-copy">© 2026 GlucoCare · Diabetes &amp; BP Management</p>
+      </div>
+    </footer>
+  </main>
+<script src="./script.js"></script>
+</body>
+</html>

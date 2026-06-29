@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GlucoCare - Diet Plan</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js"></script>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="site-header">
+      <a href="./index.html" class="brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+
+      <nav class="nav-list" id="navMenu">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html" class="active">Diet Plan</a>
+        <a href="./daily-routine.html">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+
+      <button class="header-action" type="button">Message Doctor</button>
+      <button class="menu-toggle" id="menuToggle">
+        ☰
+      </button>
+    </header>
+
+    <section class="content">
+      <!-- Diet Overview Banner -->
+      <section class="care-banner diet-banner">
+        <div class="care-banner-copy">
+          <p class="eyebrow">Nutrition Overview</p>
+          <h2>Eat right for stable sugar and blood pressure</h2>
+          <p>Follow these daily meal guidelines to keep your blood glucose steady and maintain healthy blood pressure levels.</p>
+        </div>
+        <img src="./new images/healthy_diet_banner.png" alt="Healthy Diet" class="care-banner-img" />
+      </section>
+
+      <header class="profiles-topbar">
+        <div>
+          <h1>Daily Diet Plan</h1>
+          <p class="subtitle">Recommended meals and ingredients tailored for your condition.</p>
+        </div>
+      </header>
+
+      <!-- Diet Grid -->
+      <div class="diet-grid">
+        
+        <!-- Breakfast -->
+        <article class="diet-card">
+          <div class="diet-card-header">
+            <h3>🌅 Breakfast</h3>
+            <span class="macro-badge">8:00 AM - 9:00 AM</span>
+          </div>
+          <img src="./new images/diet_breakfast.png" alt="Healthy Breakfast" class="meal-img" />
+          <div class="diet-content">
+            <div class="food-section recommended">
+              <h4>✅ Recommended</h4>
+              <ul class="food-list">
+                <li>Oatmeal with chia seeds and almonds</li>
+                <li>Boiled egg whites</li>
+                <li>Green tea or unsweetened black coffee</li>
+              </ul>
+            </div>
+            <div class="food-section avoid">
+              <h4>❌ Avoid</h4>
+              <ul class="food-list">
+                <li>Sugary cereals</li>
+                <li>White bread or refined flour parathas</li>
+                <li>Sweetened fruit juices</li>
+              </ul>
+            </div>
+          </div>
+          <div class="diet-tip">
+            <strong>Quick Tip:</strong> Include a source of lean protein to prevent sudden sugar spikes.
+          </div>
+        </article>
+
+        <!-- Lunch -->
+        <article class="diet-card">
+          <div class="diet-card-header">
+            <h3>☀️ Lunch</h3>
+            <span class="macro-badge">1:00 PM - 2:00 PM</span>
+          </div>
+          <img src="./new images/diet_lunch.png" alt="Healthy Lunch" class="meal-img" />
+          <div class="diet-content">
+            <div class="food-section recommended">
+              <h4>✅ Recommended</h4>
+              <ul class="food-list">
+                <li>Mixed vegetable salad (cucumber, tomatoes)</li>
+                <li>2 multigrain rotis or a small bowl of brown rice</li>
+                <li>Lentils (Dal) or grilled chicken/fish</li>
+              </ul>
+            </div>
+            <div class="food-section avoid">
+              <h4>❌ Avoid</h4>
+              <ul class="food-list">
+                <li>Deep fried foods (pooris, pakoras)</li>
+                <li>Excessive salt (pickles, papad)</li>
+                <li>White rice in large quantities</li>
+              </ul>
+            </div>
+          </div>
+          <div class="diet-tip">
+            <strong>Quick Tip:</strong> Start with the salad to help control your blood pressure and fill you up.
+          </div>
+        </article>
+
+        <!-- Evening Snack -->
+        <article class="diet-card">
+          <div class="diet-card-header">
+            <h3>☕ Evening Snack</h3>
+            <span class="macro-badge">4:30 PM - 5:30 PM</span>
+          </div>
+          <img src="./new images/diet_snack.png" alt="Healthy Evening Snack" class="meal-img" />
+          <div class="diet-content">
+            <div class="food-section recommended">
+              <h4>✅ Recommended</h4>
+              <ul class="food-list">
+                <li>Roasted chickpeas (makhana) or walnuts</li>
+                <li>An apple or a small bowl of papaya</li>
+                <li>Green tea</li>
+              </ul>
+            </div>
+            <div class="food-section avoid">
+              <h4>❌ Avoid</h4>
+              <ul class="food-list">
+                <li>Biscuits, cookies, and rusks</li>
+                <li>Namkeen with high sodium</li>
+                <li>Milk tea with added sugar</li>
+              </ul>
+            </div>
+          </div>
+          <div class="diet-tip">
+            <strong>Quick Tip:</strong> Keep snacks under 150 calories to avoid pre-dinner glucose spikes.
+          </div>
+        </article>
+
+        <!-- Dinner -->
+        <article class="diet-card">
+          <div class="diet-card-header">
+            <h3>🌙 Dinner</h3>
+            <span class="macro-badge">7:30 PM - 8:30 PM</span>
+          </div>
+          <img src="./new images/diet_dinner.png" alt="Healthy Dinner" class="meal-img" />
+          <div class="diet-content">
+            <div class="food-section recommended">
+              <h4>✅ Recommended</h4>
+              <ul class="food-list">
+                <li>Light vegetable soup (low sodium)</li>
+                <li>Grilled paneer or steamed fish</li>
+                <li>Steamed vegetables (broccoli, spinach, beans)</li>
+              </ul>
+            </div>
+            <div class="food-section avoid">
+              <h4>❌ Avoid</h4>
+              <ul class="food-list">
+                <li>Heavy, creamy gravies</li>
+                <li>Late-night sugary desserts</li>
+                <li>Red meat</li>
+              </ul>
+            </div>
+          </div>
+          <div class="diet-tip">
+            <strong>Quick Tip:</strong> Keep dinner light and finish at least 2 hours before bedtime.
+          </div>
+        </article>
+      </div>
+
+    </section>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a href="./index.html" class="footer-brand">
+          <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+          <div>
+            <strong>GlucoCare</strong>
+            <span>Patient Record</span>
+          </div>
+        </a>
+        <nav class="footer-nav">
+          <a href="./patient-profile.html">Patient Profile</a>
+          <a href="./diet-plan.html">Diet Plan</a>
+          <a href="./daily-routine.html">Daily Routine</a>
+          <a href="./specialists-list.html">Specialists List</a>
+        </nav>
+        <p class="footer-copy">© 2026 GlucoCare · Diabetes &amp; BP Management</p>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

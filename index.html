@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GlucoCare Patient Home</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js"></script>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="site-header">
+      <a href="./index.html" class="brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+
+      <nav class="nav-list" id="navMenu">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+
+      <button class="header-action" type="button">Message Doctor</button>
+      <button class="menu-toggle" id="menuToggle">
+        ☰
+      </button>
+
+
+    </header>
+
+    <section class="content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Today</p>
+          <h1>Record sugar and blood pressure</h1>
+        </div>
+
+      </header>
+
+      <section class="hero-banner" aria-label="Care checkup banner">
+        <div class="hero-copy">
+          <p class="eyebrow">Health Check</p>
+          <h2>Doctor-guided sugar and BP tracking</h2>
+          <p>Keep the patient's latest glucose and blood pressure readings ready for every care review.</p>
+        </div>
+        <div class="hero-photos">
+          <img class="hero-photo-main" src="./new images/blood-pressure-check.png"
+            alt="Doctor checking a patient's blood pressure" />
+          <img class="hero-photo-small" src="./new images/sugar-check.png" alt="Blood sugar check with glucose meter" />
+        </div>
+      </section>
+
+      <section class="hero-grid" aria-label="Patient dashboard">
+        <form class="entry-panel" id="readingForm">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Quick Entry</p>
+              <h2>Add a reading</h2>
+            </div>
+            <span class="status-dot" aria-hidden="true"></span>
+          </div>
+
+          <label>
+            Blood sugar
+            <span class="input-wrap">
+              <input id="sugar" name="sugar" type="number" min="40" max="500" value="126" required />
+              <span>mg/dL</span>
+            </span>
+          </label>
+
+          <div class="split">
+            <label>
+              Systolic
+              <span class="input-wrap">
+                <input id="systolic" name="systolic" type="number" min="70" max="240" value="128" required />
+                <span>mmHg</span>
+              </span>
+            </label>
+            <label>
+              Diastolic
+              <span class="input-wrap">
+                <input id="diastolic" name="diastolic" type="number" min="40" max="150" value="82" required />
+                <span>mmHg</span>
+              </span>
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>Reading time</legend>
+            <div class="segmented">
+              <label>
+                <input type="radio" name="meal" value="Fasting" checked />
+                <span>Fasting</span>
+              </label>
+              <label>
+                <input type="radio" name="meal" value="After meal" />
+                <span>After meal</span>
+              </label>
+              <label>
+                <input type="radio" name="meal" value="Bedtime" />
+                <span>Bedtime</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label>
+            Notes
+            <textarea id="notes" name="notes" rows="3" placeholder="Medicine, food, symptoms"></textarea>
+          </label>
+
+          <button class="primary-action" type="submit">Save reading</button>
+          <p class="form-message" id="formMessage" role="status">Last saved: 8:10 AM, fasting</p>
+        </form>
+
+        <section class="summary-panel" aria-label="Health summary">
+          <div class="summary-head">
+            <div>
+              <p class="eyebrow">Current Status</p>
+              <h2 id="statusTitle">In target range</h2>
+            </div>
+            <span class="badge" id="riskBadge">Stable</span>
+          </div>
+
+          <div class="vitals">
+            <article>
+              <span>Blood sugar</span>
+              <strong id="sugarStat">126</strong>
+              <small>mg/dL</small>
+            </article>
+            <article>
+              <span>Blood pressure</span>
+              <strong id="bpStat">128/82</strong>
+              <small>mmHg</small>
+            </article>
+          </div>
+
+          <div class="chart-card" aria-label="Seven day sugar trend">
+            <div class="chart-head">
+              <span>7 day sugar trend</span>
+              <strong>Avg 132 mg/dL</strong>
+            </div>
+            <div class="chart" aria-hidden="true">
+              <span style="height: 45%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 39%"></span>
+              <span style="height: 66%"></span>
+              <span style="height: 51%"></span>
+              <span style="height: 62%"></span>
+              <span class="today" style="height: 47%"></span>
+            </div>
+          </div>
+
+          <div class="device-visual" aria-hidden="true">
+            <div class="phone">
+              <div class="phone-top"></div>
+              <div class="mini-row">
+                <span></span>
+                <strong>126</strong>
+              </div>
+              <div class="mini-line wide"></div>
+              <div class="mini-line"></div>
+              <div class="pulse"></div>
+            </div>
+            <div class="meter">
+              <span></span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="lower-grid">
+        <section class="timeline" aria-label="Recent records">
+          <div class="section-title">
+            <h2>Patient's records</h2>
+            <button type="button">View all</button>
+          </div>
+          <div class="records" id="records">
+            <article>
+              <time>Today, 8:10 AM</time>
+              <strong>126 mg/dL · 128/82</strong>
+              <span>Fasting</span>
+            </article>
+            <article>
+              <time>Yesterday, 9:05 PM</time>
+              <strong>148 mg/dL · 132/84</strong>
+              <span>After meal</span>
+            </article>
+            <article>
+              <time>Yesterday, 7:20 AM</time>
+              <strong>119 mg/dL · 124/80</strong>
+              <span>Fasting</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="insights" aria-label="Health insights">
+          <div class="section-title">
+            <h2>Care notes</h2>
+          </div>
+          <article>
+            <span class="note-mark green" aria-hidden="true"></span>
+            <div>
+              <strong>Morning readings look consistent</strong>
+              <p>Fasting sugar stayed within your usual target for 4 of the last 5 mornings.</p>
+            </div>
+          </article>
+          <article>
+            <span class="note-mark amber" aria-hidden="true"></span>
+            <div>
+              <strong>Check after dinner twice this week</strong>
+              <p>Your doctor can compare post-meal values at the next review.</p>
+            </div>
+          </article>
+        </section>
+      </section>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="./index.html" class="footer-brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+      <nav class="footer-nav">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+      <p class="footer-copy">© 2026 GlucoCare · Diabetes &amp; BP Management</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

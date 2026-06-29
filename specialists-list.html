@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Specialists List – GlucoCare</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<main class="shell">
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <a href="./index.html" class="brand">
+      <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+      <div>
+        <strong>GlucoCare</strong>
+        <span>Patient Record</span>
+      </div>
+    </a>
+    <nav class="nav-list" id="navMenu">
+      <a href="./patient-profile.html">Patient Profile</a>
+      <a href="./diet-plan.html">Diet Plan</a>
+      <a href="./daily-routine.html">Daily Routine</a>
+      <a href="./specialists-list.html" class="active">Specialists List</a>
+    </nav>
+    <button class="header-action" type="button">Message Doctor</button>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open menu">☰</button>
+  </header>
+
+  <section class="content">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Your Care Team</p>
+        <h1>Specialists List</h1>
+      </div>
+    </header>
+
+    <!-- ── Banner ── -->
+    <div class="sl-banner">
+      <div class="sl-banner-copy">
+        <p class="eyebrow">Expert Medical Care</p>
+        <h2>Your dedicated<br>specialist team</h2>
+        <p>Every specialist on your care team is coordinated to manage your diabetes and blood pressure together — one unified plan.</p>
+        <div class="sl-banner-stats">
+          <div class="sl-bstat"><strong>4</strong><span>Specialists</span></div>
+          <div class="sl-bstat"><strong>2</strong><span>Hospitals</span></div>
+          <div class="sl-bstat"><strong>24/7</strong><span>Support</span></div>
+        </div>
+      </div>
+      <div class="sl-banner-imgs">
+        <div class="sl-img-grid">
+          <div class="sl-img-card sl-img-tall">
+            <div class="sl-img-placeholder">
+              <span class="sl-img-icon">👨‍⚕️</span>
+              <span class="sl-img-label">Endocrinologist</span>
+            </div>
+          </div>
+          <div class="sl-img-card">
+            <div class="sl-img-placeholder">
+              <span class="sl-img-icon">👩‍⚕️</span>
+              <span class="sl-img-label">Cardiologist</span>
+            </div>
+          </div>
+          <div class="sl-img-card">
+            <div class="sl-img-placeholder">
+              <span class="sl-img-icon">🩺</span>
+              <span class="sl-img-label">Nephrologist</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Search & Filter ── -->
+    <div class="sl-toolbar">
+      <div class="sl-search-wrap">
+        <span class="sl-search-icon">🔍</span>
+        <input class="sl-search" id="slSearch" type="text" placeholder="Search by name or specialty…" />
+      </div>
+      <div class="sl-filters" id="slFilters">
+        <button class="sl-filter active" data-filter="all">All</button>
+        <button class="sl-filter" data-filter="Endocrinologist">Endocrinologist</button>
+        <button class="sl-filter" data-filter="Cardiologist">Cardiologist</button>
+        <button class="sl-filter" data-filter="Nephrologist">Nephrologist</button>
+        <button class="sl-filter" data-filter="Dietitian">Dietitian</button>
+      </div>
+    </div>
+
+    <!-- ── Specialists Grid ── -->
+    <div class="sl-grid" id="slGrid">
+
+      <!-- Dr. Anil Sharma -->
+      <article class="sl-card" data-specialty="Endocrinologist">
+        <div class="sl-card-top">
+          <div class="sl-avatar" style="background: linear-gradient(135deg,#0f766e,#2f9d7e)">AS</div>
+          <div class="sl-avail available">● Available</div>
+        </div>
+        <div class="sl-card-body">
+          <h3>Dr. Anil Sharma</h3>
+          <span class="sl-specialty-badge endo">Endocrinologist</span>
+          <div class="sl-meta">
+            <span>🏥 Apollo Hospital, Delhi</span>
+            <span>🎓 MBBS, MD (Medicine), DM (Endocrinology)</span>
+            <span>⏱ 18 years experience</span>
+            <span>🌐 Hindi, English</span>
+          </div>
+          <p class="sl-about">Specialises in Type 2 diabetes management, insulin therapy, and hormonal disorders. Lead consultant for GlucoCare patients.</p>
+        </div>
+        <div class="sl-card-foot">
+          <div class="sl-timing">
+            <span class="sl-timing-label">Next slot</span>
+            <strong>Mon & Thu · 10 AM – 1 PM</strong>
+          </div>
+          <div class="sl-actions">
+            <a href="tel:+911141234567" class="sl-btn sl-btn-outline">📞 Call</a>
+            <button class="sl-btn sl-btn-primary">Book Appointment</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dr. Priya Mehta -->
+      <article class="sl-card" data-specialty="Cardiologist">
+        <div class="sl-card-top">
+          <div class="sl-avatar" style="background: linear-gradient(135deg,#356fb4,#1d4ed8)">PM</div>
+          <div class="sl-avail available">● Available</div>
+        </div>
+        <div class="sl-card-body">
+          <h3>Dr. Priya Mehta</h3>
+          <span class="sl-specialty-badge cardio">Cardiologist</span>
+          <div class="sl-meta">
+            <span>🏥 Fortis Heart Institute, Delhi</span>
+            <span>🎓 MBBS, MD, DM (Cardiology)</span>
+            <span>⏱ 14 years experience</span>
+            <span>🌐 Hindi, English, Gujarati</span>
+          </div>
+          <p class="sl-about">Expert in hypertension management and cardiovascular risk reduction for diabetic patients. Provides coordinated BP care.</p>
+        </div>
+        <div class="sl-card-foot">
+          <div class="sl-timing">
+            <span class="sl-timing-label">Next slot</span>
+            <strong>Tue & Fri · 11 AM – 2 PM</strong>
+          </div>
+          <div class="sl-actions">
+            <a href="tel:+911141234568" class="sl-btn sl-btn-outline">📞 Call</a>
+            <button class="sl-btn sl-btn-primary">Book Appointment</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dr. Rajesh Gupta -->
+      <article class="sl-card" data-specialty="Nephrologist">
+        <div class="sl-card-top">
+          <div class="sl-avatar" style="background: linear-gradient(135deg,#c87924,#d97706)">RG</div>
+          <div class="sl-avail busy">● Busy</div>
+        </div>
+        <div class="sl-card-body">
+          <h3>Dr. Rajesh Gupta</h3>
+          <span class="sl-specialty-badge nephro">Nephrologist</span>
+          <div class="sl-meta">
+            <span>🏥 Apollo Hospital, Delhi</span>
+            <span>🎓 MBBS, MD, DM (Nephrology)</span>
+            <span>⏱ 22 years experience</span>
+            <span>🌐 Hindi, English</span>
+          </div>
+          <p class="sl-about">Monitors kidney function in diabetic patients. Manages diabetic nephropathy and advises on medication adjustments for renal safety.</p>
+        </div>
+        <div class="sl-card-foot">
+          <div class="sl-timing">
+            <span class="sl-timing-label">Next slot</span>
+            <strong>Wed · 9 AM – 12 PM</strong>
+          </div>
+          <div class="sl-actions">
+            <a href="tel:+911141234569" class="sl-btn sl-btn-outline">📞 Call</a>
+            <button class="sl-btn sl-btn-primary">Book Appointment</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Ms. Sunita Rao -->
+      <article class="sl-card" data-specialty="Dietitian">
+        <div class="sl-card-top">
+          <div class="sl-avatar" style="background: linear-gradient(135deg,#2f9d7e,#059669)">SR</div>
+          <div class="sl-avail available">● Available</div>
+        </div>
+        <div class="sl-card-body">
+          <h3>Ms. Sunita Rao</h3>
+          <span class="sl-specialty-badge diet">Dietitian</span>
+          <div class="sl-meta">
+            <span>🏥 Fortis Heart Institute, Delhi</span>
+            <span>🎓 B.Sc Nutrition, M.Sc Clinical Dietetics</span>
+            <span>⏱ 10 years experience</span>
+            <span>🌐 Hindi, English, Telugu</span>
+          </div>
+          <p class="sl-about">Creates personalised low-GI meal plans for diabetic and hypertensive patients. Coordinates dietary guidance with the medical team.</p>
+        </div>
+        <div class="sl-card-foot">
+          <div class="sl-timing">
+            <span class="sl-timing-label">Next slot</span>
+            <strong>Mon – Sat · 9 AM – 5 PM</strong>
+          </div>
+          <div class="sl-actions">
+            <a href="tel:+911141234570" class="sl-btn sl-btn-outline">📞 Call</a>
+            <button class="sl-btn sl-btn-primary">Book Appointment</button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.sl-grid -->
+
+    <!-- Empty state -->
+    <div class="sl-empty" id="slEmpty" style="display:none">
+      <span>🔍</span>
+      <p>No specialists found for your search.</p>
+    </div>
+
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="./index.html" class="footer-brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+      <nav class="footer-nav">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+      <p class="footer-copy">© 2026 GlucoCare · Diabetes &amp; BP Management</p>
+    </div>
+  </footer>
+
+</main>
+<script src="./script.js"></script>
+</body>
+</html>

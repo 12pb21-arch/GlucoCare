@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Routine – GlucoCare</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js"></script>
+</head>
+
+<body>
+  <main class="shell">
+    <header class="site-header">
+      <a href="./index.html" class="brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+
+      <nav class="nav-list" id="navMenu">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html" class="active">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+
+      <button class="header-action" type="button">Message Doctor</button>
+      <button class="menu-toggle" id="menuToggle">
+        ☰
+      </button>
+    </header>
+
+
+
+    <!-- ── Page content ─────────────────────────────────────────── -->
+    <section class="content">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Daily Routine</p>
+          <h1>Your structured day</h1>
+        </div>
+      </header>
+
+      <!-- Banner -->
+      <div class="routine-banner">
+        <div class="banner-copy">
+          <p class="eyebrow">Movement &amp; Wellness</p>
+          <h1>Stay active,<br>stay in control</h1>
+          <p>A structured daily routine helps keep blood sugar stable and blood pressure within range — every hour
+            counts.</p>
+          <div class="banner-stats">
+            <div class="bstat">
+              <strong>45</strong>
+              <span>Min exercise</span>
+            </div>
+            <div class="bstat">
+              <strong>8</strong>
+              <span>Glasses water</span>
+            </div>
+            <div class="bstat">
+              <strong>3</strong>
+              <span>Readings/day</span>
+            </div>
+          </div>
+        </div>
+        <div class="banner-photos">
+          <img src="./new images/girl_workout.avif"    alt="A girl doing morning exercise indoors" />
+          <img src="./new images/girl_yogapose.avif"   alt="A girl doing pranayam" />
+          <img src="./new images/upstairing_girl.avif" alt="A girl is climbing stairs" />
+        </div>
+      </div>
+
+      <!-- Day progress -->
+      <div class="day-progress">
+        <span class="label">Day progress</span>
+        <div class="prog-track">
+          <div class="prog-fill" id="progFill"></div>
+        </div>
+        <span class="prog-pct" id="progPct">42%</span>
+      </div>
+
+      <!-- Main layout -->
+      <div class="routine-layout">
+
+        <!-- Timeline -->
+        <div class="timeline-wrap">
+          <h2>Today's schedule</h2>
+          <div class="tl-list">
+
+            <!-- 5:30 AM -->
+            <div class="tl-item done-item">
+              <span class="tl-time">5:30 AM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot done">🌅</div>
+              </div>
+              <div class="tl-body">
+                <h3>Wake up &amp; fasting sugar check</h3>
+                <p>Take fasting blood glucose reading before eating or drinking anything. Log in app.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Glucose check</span>
+                  <span class="tl-tag blue">BP reading</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6:00 AM -->
+            <div class="tl-item done-item">
+              <span class="tl-time">6:00 AM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot done">💧</div>
+              </div>
+              <div class="tl-body">
+                <h3>Warm water &amp; morning medication</h3>
+                <p>Take Metformin 500mg with a full glass of warm water. Avoid tea/coffee for 30 min.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag amber">Medication</span>
+                  <span class="tl-tag green">Hydration</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6:30 AM -->
+            <div class="tl-item done-item">
+              <span class="tl-time">6:30 AM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot done">🚶</div>
+              </div>
+              <div class="tl-body">
+                <h3>Morning walk — 30 minutes</h3>
+                <p>Brisk walk at moderate pace. Helps lower fasting glucose and reduces BP by 4–9 mmHg. Wear comfortable
+                  shoes.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Cardio</span>
+                  <span class="tl-tag blue">30 min</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7:30 AM -->
+            <div class="tl-item done-item">
+              <span class="tl-time">7:30 AM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot done">🥣</div>
+              </div>
+              <div class="tl-body">
+                <h3>Breakfast — low GI meal</h3>
+                <p>Oats with nuts &amp; seeds, or 2 eggs with whole-grain toast. Avoid refined carbs and fruit juice.
+                </p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Low GI</span>
+                  <span class="tl-tag blue">High fibre</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10:00 AM -->
+            <div class="tl-item done-item">
+              <span class="tl-time">10:00 AM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot done">🍎</div>
+              </div>
+              <div class="tl-body">
+                <h3>Mid-morning snack</h3>
+                <p>A small apple or a handful of almonds. Prevents glucose dips between meals. Drink a glass of water.
+                </p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Snack</span>
+                  <span class="tl-tag green">Hydration</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 12:00 PM — ACTIVE NOW -->
+            <div class="tl-item" id="activeItem">
+              <span class="tl-time">12:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot active">🍱</div>
+              </div>
+              <div class="tl-body">
+                <h3>Lunch — balanced plate</h3>
+                <p>½ plate non-starchy vegetables, ¼ lean protein (dal, chicken, tofu), ¼ whole grain (brown rice/roti).
+                  Eat slowly.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Balanced</span>
+                  <span class="tl-tag blue">Portion control</span>
+                  <span class="tl-tag amber">Post-meal check</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 1:00 PM -->
+            <div class="tl-item">
+              <span class="tl-time">1:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">📊</div>
+              </div>
+              <div class="tl-body">
+                <h3>Post-lunch glucose check</h3>
+                <p>Check blood sugar 1–2 hours after eating. Target: under 180 mg/dL. Log reading with meal notes.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Glucose check</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2:00 PM -->
+            <div class="tl-item">
+              <span class="tl-time">2:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">🧘</div>
+              </div>
+              <div class="tl-body">
+                <h3>Rest &amp; breathing exercise</h3>
+                <p>10-minute deep breathing or light stretching. Reduces cortisol, which spikes blood sugar. Avoid heavy
+                  napping.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag blue">Relaxation</span>
+                  <span class="tl-tag green">Stress control</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4:30 PM -->
+            <div class="tl-item">
+              <span class="tl-time">4:30 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">🏋️</div>
+              </div>
+              <div class="tl-body">
+                <h3>Resistance / yoga session — 15 min</h3>
+                <p>Light resistance bands, bodyweight squats, or gentle yoga. Improves insulin sensitivity. Not if
+                  glucose &lt; 100 mg/dL.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Strength</span>
+                  <span class="tl-tag blue">15 min</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5:00 PM -->
+            <div class="tl-item">
+              <span class="tl-time">5:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">☕</div>
+              </div>
+              <div class="tl-body">
+                <h3>Evening snack &amp; herbal tea</h3>
+                <p>Roasted chana, cucumber slices, or a small bowl of sprouts. Pair with unsweetened green tea.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Snack</span>
+                  <span class="tl-tag amber">No sugar</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7:00 PM -->
+            <div class="tl-item">
+              <span class="tl-time">7:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">🍛</div>
+              </div>
+              <div class="tl-body">
+                <h3>Dinner — light &amp; early</h3>
+                <p>Soup, sabzi, 1 roti / small portion of khichdi. Finish dinner by 7:30 PM. Avoid rice at night.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Light meal</span>
+                  <span class="tl-tag rose">No rice</span>
+                  <span class="tl-tag blue">Early eating</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8:30 PM -->
+            <div class="tl-item">
+              <span class="tl-time">8:30 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">🌙</div>
+              </div>
+              <div class="tl-body">
+                <h3>Evening walk — 15 minutes</h3>
+                <p>Gentle post-dinner walk to blunt post-meal glucose spike. Keep pace comfortable. Avoid vigorous
+                  exercise at night.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag green">Cardio</span>
+                  <span class="tl-tag blue">15 min</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9:30 PM -->
+            <div class="tl-item">
+              <span class="tl-time">9:30 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">💊</div>
+              </div>
+              <div class="tl-body">
+                <h3>Night medication &amp; bedtime sugar check</h3>
+                <p>Take evening medications as prescribed. Log bedtime glucose. Target: 100–140 mg/dL before bed.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag amber">Medication</span>
+                  <span class="tl-tag green">Glucose check</span>
+                  <span class="tl-tag blue">BP reading</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 10:00 PM -->
+            <div class="tl-item">
+              <span class="tl-time">10:00 PM</span>
+              <div class="tl-dot-wrap">
+                <div class="tl-dot upcoming">😴</div>
+              </div>
+              <div class="tl-body">
+                <h3>Sleep — 7 to 8 hours</h3>
+                <p>Poor sleep raises cortisol and blood sugar. Keep the room dark and cool. Avoid phone screens 30 min
+                  before bed.</p>
+                <div class="tl-tags">
+                  <span class="tl-tag blue">7–8 hrs</span>
+                  <span class="tl-tag green">Recovery</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.tl-list -->
+        </div><!-- /.timeline-wrap -->
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+          <!-- Hydration tracker -->
+          <div class="side-card">
+            <h3>💧 Hydration tracker</h3>
+            <div class="water-grid" id="waterGrid">
+              <!-- filled by JS -->
+            </div>
+            <p class="water-note">Goal: <strong id="waterCount">5 of 8</strong> glasses today</p>
+          </div>
+
+          <!-- Medication -->
+          <div class="side-card">
+            <h3>💊 Today's medication</h3>
+            <div class="med-list">
+              <div class="med-item">
+                <span class="med-icon">🟠</span>
+                <div class="med-info">
+                  <strong>Metformin 500mg</strong>
+                  <span>Morning · With food</span>
+                </div>
+                <div class="med-check taken" title="Taken">✓</div>
+              </div>
+              <div class="med-item">
+                <span class="med-icon">🔵</span>
+                <div class="med-info">
+                  <strong>Amlodipine 5mg</strong>
+                  <span>Morning · BP control</span>
+                </div>
+                <div class="med-check taken" title="Taken">✓</div>
+              </div>
+              <div class="med-item">
+                <span class="med-icon">🟡</span>
+                <div class="med-info">
+                  <strong>Metformin 500mg</strong>
+                  <span>Night · With dinner</span>
+                </div>
+                <div class="med-check" id="nightMed" title="Mark taken"></div>
+              </div>
+              <div class="med-item">
+                <span class="med-icon">🔴</span>
+                <div class="med-info">
+                  <strong>Telmisartan 40mg</strong>
+                  <span>Night · BP control</span>
+                </div>
+                <div class="med-check" id="nightBP" title="Mark taken"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor's tips -->
+          <div class="side-card">
+            <h3>📋 Doctor's reminders</h3>
+            <div class="tip-list">
+              <div class="tip-item">
+                <span class="tip-icon">🚫</span>
+                <span>Avoid salty snacks — sodium raises BP. Keep daily sodium under 1,500 mg.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">🍬</span>
+                <span>No sugary drinks at all — swap cola and juice for plain water or nimbu pani without sugar.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">👟</span>
+                <span>Check feet daily for cuts, blisters, or numbness — diabetic neuropathy risk.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">😤</span>
+                <span>Manage stress actively — 10 min of deep breathing daily measurably reduces cortisol and
+                  sugar.</span>
+              </div>
+              <div class="tip-item">
+                <span class="tip-icon">📅</span>
+                <span>Next review: <strong style="color:var(--teal)">July 5, 2026</strong>. Bring 2-week glucose
+                  log.</span>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+      </div><!-- /.routine-layout -->
+    </section><!-- /.content -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="./index.html" class="footer-brand">
+        <img src="./new images/diabetes-logo.png" alt="GlucoCare logo" />
+        <div>
+          <strong>GlucoCare</strong>
+          <span>Patient Record</span>
+        </div>
+      </a>
+      <nav class="footer-nav">
+        <a href="./patient-profile.html">Patient Profile</a>
+        <a href="./diet-plan.html">Diet Plan</a>
+        <a href="./daily-routine.html" class="active">Daily Routine</a>
+        <a href="./specialists-list.html">Specialists List</a>
+      </nav>
+      <p class="footer-copy">© 2026 GlucoCare · Diabetes &amp; BP Management</p>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
