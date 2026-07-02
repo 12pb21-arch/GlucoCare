@@ -1,45 +1,51 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ── Reading form ──────────────────────────────────────────────
-  const form        = document.querySelector('#readingForm');
-  const records     = document.querySelector('#records');
-  const sugarStat   = document.querySelector('#sugarStat');
-  const bpStat      = document.querySelector('#bpStat');
+  const form = document.querySelector('#readingForm');
+  const records = document.querySelector('#records');
+  const sugarStat = document.querySelector('#sugarStat');
+  const bpStat = document.querySelector('#bpStat');
   const statusTitle = document.querySelector('#statusTitle');
-  const riskBadge   = document.querySelector('#riskBadge');
+  const riskBadge = document.querySelector('#riskBadge');
   const formMessage = document.querySelector('#formMessage');
 
   function getStatus(sugar, systolic, diastolic) {
     if (sugar >= 180 || systolic >= 140 || diastolic >= 90)
-      return { title: 'Needs attention', badge: 'Review', className: 'alert',
-               message: 'Saved. This reading is higher than the usual target.' };
+      return {
+        title: 'Needs attention', badge: 'Review', className: 'alert',
+        message: 'Saved. This reading is higher than the usual target.'
+      };
     if (sugar >= 140 || systolic >= 130 || diastolic >= 85)
-      return { title: 'Slightly elevated', badge: 'Watch', className: 'warn',
-               message: 'Saved. Keep watching the next few readings.' };
-    return { title: 'In target range', badge: 'Stable', className: '',
-             message: 'Saved. This reading is in your usual target range.' };
+      return {
+        title: 'Slightly elevated', badge: 'Watch', className: 'warn',
+        message: 'Saved. Keep watching the next few readings.'
+      };
+    return {
+      title: 'In target range', badge: 'Stable', className: '',
+      message: 'Saved. This reading is in your usual target range.'
+    };
   }
 
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const data      = new FormData(form);
-      const sugar     = Number(data.get('sugar'));
-      const systolic  = Number(data.get('systolic'));
+      const data = new FormData(form);
+      const sugar = Number(data.get('sugar'));
+      const systolic = Number(data.get('systolic'));
       const diastolic = Number(data.get('diastolic'));
-      const meal      = data.get('meal');
-      const now       = new Date();
-      const status    = getStatus(sugar, systolic, diastolic);
+      const meal = data.get('meal');
+      const now = new Date();
+      const status = getStatus(sugar, systolic, diastolic);
 
-      sugarStat.textContent   = sugar;
-      bpStat.textContent      = systolic + '/' + diastolic;
+      sugarStat.textContent = sugar;
+      bpStat.textContent = systolic + '/' + diastolic;
       statusTitle.textContent = status.title;
-      riskBadge.textContent   = status.badge;
-      riskBadge.className     = ('badge ' + status.className).trim();
+      riskBadge.textContent = status.badge;
+      riskBadge.className = ('badge ' + status.className).trim();
       formMessage.textContent = status.message;
 
       const article = document.createElement('article');
-      const time    = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      const time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
       article.innerHTML =
         '<time>Today, ' + time + '</time>' +
         '<strong>' + sugar + ' mg/dL · ' + systolic + '/' + diastolic + '</strong>' +
@@ -50,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ── Hamburger menu ────────────────────────────────────────────
   const menuToggle = document.getElementById('menuToggle');
-  const navMenu    = document.getElementById('navMenu');
+  const navMenu = document.getElementById('navMenu');
 
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', function (e) {
@@ -87,16 +93,16 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!document.querySelector('.routine-layout')) return; // only run on this page
 
   /* Day progress based on current time (5:30 AM → 10:00 PM) */
-  const now  = new Date();
+  const now = new Date();
   const curr = now.getHours() + now.getMinutes() / 60;
-  const pct  = Math.min(100, Math.max(0, Math.round((curr - 5.5) / (22 - 5.5) * 100)));
+  const pct = Math.min(100, Math.max(0, Math.round((curr - 5.5) / (22 - 5.5) * 100)));
   const fill = document.getElementById('progFill');
   const pctEl = document.getElementById('progPct');
-  if (fill)  fill.style.width = pct + '%';
+  if (fill) fill.style.width = pct + '%';
   if (pctEl) pctEl.textContent = pct + '%';
 
   /* Hydration tracker */
-  const waterGrid  = document.getElementById('waterGrid');
+  const waterGrid = document.getElementById('waterGrid');
   const waterCount = document.getElementById('waterCount');
   let filled = 5;
 
@@ -139,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!document.querySelector('.multi-profile-grid')) return;
 
   var STORAGE_KEY = 'glucocare_patients_v3';
-  var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   /* ── localStorage helpers (placeholder persistence layer) ── */
   function loadStore() {
@@ -150,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function saveStore(store) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); } catch (e) {}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); } catch (e) { }
   }
 
   function getPatient(store, id) {
@@ -206,15 +212,15 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.className = 'modal-overlay';
     overlay.innerHTML =
       '<div class="modal-box">' +
-        '<div class="modal-head">' +
-          '<h3>' + titleText + '</h3>' +
-          '<button class="modal-close" id="modalClose">✕</button>' +
-        '</div>' +
-        '<div class="modal-body">' + bodyHTML + '</div>' +
-        '<div class="modal-foot">' +
-          '<button class="modal-cancel" id="modalCancel">Cancel</button>' +
-          '<button class="primary-action modal-submit" id="modalSubmit">Save</button>' +
-        '</div>' +
+      '<div class="modal-head">' +
+      '<h3>' + titleText + '</h3>' +
+      '<button class="modal-close" id="modalClose">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' + bodyHTML + '</div>' +
+      '<div class="modal-foot">' +
+      '<button class="modal-cancel" id="modalCancel">Cancel</button>' +
+      '<button class="primary-action modal-submit" id="modalSubmit">Save</button>' +
+      '</div>' +
       '</div>';
 
     document.body.appendChild(overlay);
@@ -281,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
       header.className = 'month-group-toggle';
       header.innerHTML =
         '<span class="month-group-title">' + MONTH_NAMES[monthIdx] + ' ' + year +
-          (isCurrent ? ' <span class="month-current-badge">Current</span>' : '') + '</span>' +
+        (isCurrent ? ' <span class="month-current-badge">Current</span>' : '') + '</span>' +
         '<span class="month-group-count">' + groups[key].length + ' ' + (groups[key].length === 1 ? 'entry' : 'entries') + '</span>' +
         '<span class="month-group-chevron">⌄</span>';
 
@@ -292,23 +298,23 @@ document.addEventListener('DOMContentLoaded', function () {
       table.className = 'records-table';
       table.innerHTML =
         '<thead>' +
-          '<tr><th>DATE</th><th>🩸 SUGAR (MG/DL)</th><th>♥ BLOOD PRESSURE (MMHG)</th></tr>' +
-          '<tr class="sub-headers"><th>DATE</th><th>FASTING</th><th>AFTER BREAKFAST</th><th>MORNING</th><th>EVENING</th></tr>' +
+        '<tr><th>DATE</th><th>🩸 SUGAR (MG/DL)</th><th>♥ BLOOD PRESSURE (MMHG)</th></tr>' +
+        '<tr class="sub-headers"><th>DATE</th><th>FASTING</th><th>AFTER BREAKFAST</th><th>MORNING</th><th>EVENING</th></tr>' +
         '</thead>' +
         '<tbody></tbody>';
 
       var tbody = table.querySelector('tbody');
       groups[key].forEach(function (r) {
         var d = parseLocalDate(r.date);
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var dateStr = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
         var tr = document.createElement('tr');
         tr.innerHTML =
           '<td>' + dateStr + '</td>' +
           '<td class="' + sugarClass(Number(r.fasting)) + '">' + (r.fasting || '—') + '</td>' +
-          '<td class="' + sugarClass(Number(r.after))   + '">' + (r.after   || '—') + '</td>' +
+          '<td class="' + sugarClass(Number(r.after)) + '">' + (r.after || '—') + '</td>' +
           '<td class="' + bpClass(r.bpMorn) + '">' + (r.bpMorn || '—') + '</td>' +
-          '<td class="' + bpClass(r.bpEve)  + '">' + (r.bpEve  || '—') + '</td>';
+          '<td class="' + bpClass(r.bpEve) + '">' + (r.bpEve || '—') + '</td>';
         tbody.appendChild(tr);
       });
 
@@ -327,9 +333,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function refreshTodayPill() {
-    var store   = loadStore();
+    var store = loadStore();
     var todayStr = new Date().toISOString().split('T')[0];
-    var count   = 0;
+    var count = 0;
     Object.keys(store).forEach(function (id) {
       (store[id].records || []).forEach(function (r) { if (r.date === todayStr) count++; });
     });
@@ -346,27 +352,27 @@ document.addEventListener('DOMContentLoaded', function () {
   function openAddPatient() {
     var body =
       '<div class="modal-grid">' +
-        '<label class="modal-label">Full name<input class="modal-input" id="mName" placeholder="e.g. Sh. Raj Kumar" /></label>' +
-        '<label class="modal-label">Age<input class="modal-input" id="mAge" type="number" min="1" max="120" placeholder="e.g. 55" /></label>' +
-        '<label class="modal-label">Gender' +
-          '<select class="modal-input" id="mGender"><option value="Male">Male ♂</option><option value="Female">Female ♀</option><option value="Other">Other</option></select>' +
-        '</label>' +
-        '<label class="modal-label">Weight (kg)<input class="modal-input" id="mWeight" type="number" placeholder="e.g. 68" /></label>' +
-        '<label class="modal-label">Blood group' +
-          '<select class="modal-input" id="mBlood"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select>' +
-        '</label>' +
-        '<label class="modal-label" style="grid-column:1/-1">Medical history<input class="modal-input" id="mHistory" placeholder="e.g. Type 2 Diabetes, Hypertension" /></label>' +
+      '<label class="modal-label">Full name<input class="modal-input" id="mName" placeholder="e.g. Sh. Raj Kumar" /></label>' +
+      '<label class="modal-label">Age<input class="modal-input" id="mAge" type="number" min="1" max="120" placeholder="e.g. 55" /></label>' +
+      '<label class="modal-label">Gender' +
+      '<select class="modal-input" id="mGender"><option value="Male">Male ♂</option><option value="Female">Female ♀</option><option value="Other">Other</option></select>' +
+      '</label>' +
+      '<label class="modal-label">Weight (kg)<input class="modal-input" id="mWeight" type="number" placeholder="e.g. 68" /></label>' +
+      '<label class="modal-label">Blood group' +
+      '<select class="modal-input" id="mBlood"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select>' +
+      '</label>' +
+      '<label class="modal-label" style="grid-column:1/-1">Medical history<input class="modal-input" id="mHistory" placeholder="e.g. Type 2 Diabetes, Hypertension" /></label>' +
       '</div>' +
       '<p class="modal-error" id="mError"></p>';
 
     createModal('➕ Add New Patient', body, function (overlay) {
-      var name    = overlay.querySelector('#mName').value.trim();
-      var age     = overlay.querySelector('#mAge').value.trim();
-      var gender  = overlay.querySelector('#mGender').value;
-      var weight  = overlay.querySelector('#mWeight').value.trim();
-      var blood   = overlay.querySelector('#mBlood').value;
+      var name = overlay.querySelector('#mName').value.trim();
+      var age = overlay.querySelector('#mAge').value.trim();
+      var gender = overlay.querySelector('#mGender').value;
+      var weight = overlay.querySelector('#mWeight').value.trim();
+      var blood = overlay.querySelector('#mBlood').value;
       var history = overlay.querySelector('#mHistory').value.trim();
-      var err     = overlay.querySelector('#mError');
+      var err = overlay.querySelector('#mError');
 
       if (!name) { err.textContent = 'Please enter the patient\'s full name.'; return false; }
 
@@ -375,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .map(function (w) { return w[0].toUpperCase(); }).join('');
 
       var genderIcon = gender === 'Female' ? '♀' : gender === 'Male' ? '♂' : '⚧';
-      var patientId  = nextPatientId();
+      var patientId = nextPatientId();
 
       var grid = document.querySelector('.multi-profile-grid');
       var card = document.createElement('article');
@@ -383,32 +389,32 @@ document.addEventListener('DOMContentLoaded', function () {
       card.dataset.patientId = patientId;
       card.innerHTML =
         '<header class="card-header">' +
-          '<div class="patient-identity">' +
-            '<span class="avatar blue">' + initials + '</span>' +
-            '<div class="patient-name">' +
-              '<strong>' + name + '</strong>' +
-              '<div class="badges-row">' +
-                (age    ? '<span class="info-badge">🎂 ' + age + ' yrs</span>' : '') +
-                '<span class="info-badge">' + genderIcon + ' ' + gender + '</span>' +
-                (weight ? '<span class="info-badge">⚖ ' + weight + ' kg</span>' : '') +
-                '<span class="info-badge">🩸 ' + blood + '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="card-actions">' +
-            '<button class="icon-btn edit" title="Edit">✎</button>' +
-            '<button class="icon-btn delete" title="Delete">🗑</button>' +
-          '</div>' +
+        '<div class="patient-identity">' +
+        '<span class="avatar blue">' + initials + '</span>' +
+        '<div class="patient-name">' +
+        '<strong>' + name + '</strong>' +
+        '<div class="badges-row">' +
+        (age ? '<span class="info-badge">🎂 ' + age + ' yrs</span>' : '') +
+        '<span class="info-badge">' + genderIcon + ' ' + gender + '</span>' +
+        (weight ? '<span class="info-badge">⚖ ' + weight + ' kg</span>' : '') +
+        '<span class="info-badge">🩸 ' + blood + '</span>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="card-actions">' +
+        '<button class="icon-btn edit" title="Edit">✎</button>' +
+        '<button class="icon-btn delete" title="Delete">🗑</button>' +
+        '</div>' +
         '</header>' +
         '<div class="patient-history">' +
-          '<span class="history-label">HISTORY</span>' +
-          '<p>' + (history || 'No history added.') + '</p>' +
+        '<span class="history-label">HISTORY</span>' +
+        '<p>' + (history || 'No history added.') + '</p>' +
         '</div>' +
         '<div class="records-section">' +
-          '<div class="records-header">' +
-            '<h3>📋 Daily Health Records <span>(0 entries)</span></h3>' +
-            '<button class="small-action-btn add-record-btn">+ Add Record</button>' +
-          '</div>' +
+        '<div class="records-header">' +
+        '<h3>📋 Daily Health Records <span>(0 entries)</span></h3>' +
+        '<button class="small-action-btn add-record-btn">+ Add Record</button>' +
+        '</div>' +
         '</div>';
 
       grid.appendChild(card);
@@ -431,21 +437,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var today = new Date().toISOString().split('T')[0];
     var body =
       '<div class="modal-grid">' +
-        '<label class="modal-label" style="grid-column:1/-1">Date<input class="modal-input" id="rDate" type="date" value="' + today + '" /></label>' +
-        '<label class="modal-label">Fasting sugar (mg/dL)<input class="modal-input" id="rFasting" type="number" min="40" max="600" placeholder="e.g. 126" /></label>' +
-        '<label class="modal-label">After breakfast (mg/dL)<input class="modal-input" id="rAfter" type="number" min="40" max="600" placeholder="e.g. 160" /></label>' +
-        '<label class="modal-label">Morning BP (mmHg)<input class="modal-input" id="rBPMorn" placeholder="e.g. 128/82" /></label>' +
-        '<label class="modal-label">Evening BP (mmHg)<input class="modal-input" id="rBPEve" placeholder="e.g. 124/80" /></label>' +
+      '<label class="modal-label" style="grid-column:1/-1">Date<input class="modal-input" id="rDate" type="date" value="' + today + '" /></label>' +
+      '<label class="modal-label">Fasting sugar (mg/dL)<input class="modal-input" id="rFasting" type="number" min="40" max="600" placeholder="e.g. 126" /></label>' +
+      '<label class="modal-label">After breakfast (mg/dL)<input class="modal-input" id="rAfter" type="number" min="40" max="600" placeholder="e.g. 160" /></label>' +
+      '<label class="modal-label">Morning BP (mmHg)<input class="modal-input" id="rBPMorn" placeholder="e.g. 128/82" /></label>' +
+      '<label class="modal-label">Evening BP (mmHg)<input class="modal-input" id="rBPEve" placeholder="e.g. 124/80" /></label>' +
       '</div>' +
       '<p class="modal-error" id="rError"></p>';
 
     createModal('📋 Add Health Record', body, function (overlay) {
-      var dateVal  = overlay.querySelector('#rDate').value;
-      var fasting  = overlay.querySelector('#rFasting').value.trim();
-      var after    = overlay.querySelector('#rAfter').value.trim();
-      var bpMorn   = overlay.querySelector('#rBPMorn').value.trim();
-      var bpEve    = overlay.querySelector('#rBPEve').value.trim();
-      var err      = overlay.querySelector('#rError');
+      var dateVal = overlay.querySelector('#rDate').value;
+      var fasting = overlay.querySelector('#rFasting').value.trim();
+      var after = overlay.querySelector('#rAfter').value.trim();
+      var bpMorn = overlay.querySelector('#rBPMorn').value.trim();
+      var bpEve = overlay.querySelector('#rBPEve').value.trim();
+      var err = overlay.querySelector('#rError');
 
       if (!dateVal) { err.textContent = 'Please select a date.'; return false; }
       if (!fasting && !after && !bpMorn && !bpEve) {
@@ -453,8 +459,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var patientId = card.dataset.patientId;
-      var store     = loadStore();
-      var patient   = getPatient(store, patientId);
+      var store = loadStore();
+      var patient = getPatient(store, patientId);
       patient.records.push({ date: dateVal, fasting: fasting, after: after, bpMorn: bpMorn, bpEve: bpEve });
       saveStore(store);
 
@@ -469,11 +475,11 @@ document.addEventListener('DOMContentLoaded', function () {
   ════════════════════════════════════════════════ */
   function openEditPatient(card) {
     var patientId = card.dataset.patientId;
-    var store     = loadStore();
-    var patient   = getPatient(store, patientId);
-    var meta      = patient.meta || {};
+    var store = loadStore();
+    var patient = getPatient(store, patientId);
+    var meta = patient.meta || {};
 
-    var nameEl    = card.querySelector('.patient-name strong');
+    var nameEl = card.querySelector('.patient-name strong');
     var historyEl = card.querySelector('.patient-history p');
 
     function opt(value, label, selected) {
@@ -482,35 +488,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var body =
       '<div class="modal-grid">' +
-        '<label class="modal-label">Full name<input class="modal-input" id="eName" value="' + (meta.name || '').replace(/"/g, '&quot;') + '" /></label>' +
-        '<label class="modal-label">Age<input class="modal-input" id="eAge" type="number" min="1" max="120" value="' + (meta.age || '') + '" /></label>' +
-        '<label class="modal-label">Gender' +
-          '<select class="modal-input" id="eGender">' +
-            opt('Male', 'Male ♂', meta.gender === 'Male') +
-            opt('Female', 'Female ♀', meta.gender === 'Female') +
-            opt('Other', 'Other', meta.gender === 'Other') +
-          '</select>' +
-        '</label>' +
-        '<label class="modal-label">Weight (kg)<input class="modal-input" id="eWeight" type="number" value="' + (meta.weight || '') + '" /></label>' +
-        '<label class="modal-label">Blood group' +
-          '<select class="modal-input" id="eBlood">' +
-            ['A+','A-','B+','B-','O+','O-','AB+','AB-'].map(function (bg) {
-              return opt(bg, bg, bg === meta.blood);
-            }).join('') +
-          '</select>' +
-        '</label>' +
-        '<label class="modal-label" style="grid-column:1/-1">Medical history<input class="modal-input" id="eHistory" value="' + (meta.history || '').replace(/"/g, '&quot;') + '" /></label>' +
+      '<label class="modal-label">Full name<input class="modal-input" id="eName" value="' + (meta.name || '').replace(/"/g, '&quot;') + '" /></label>' +
+      '<label class="modal-label">Age<input class="modal-input" id="eAge" type="number" min="1" max="120" value="' + (meta.age || '') + '" /></label>' +
+      '<label class="modal-label">Gender' +
+      '<select class="modal-input" id="eGender">' +
+      opt('Male', 'Male ♂', meta.gender === 'Male') +
+      opt('Female', 'Female ♀', meta.gender === 'Female') +
+      opt('Other', 'Other', meta.gender === 'Other') +
+      '</select>' +
+      '</label>' +
+      '<label class="modal-label">Weight (kg)<input class="modal-input" id="eWeight" type="number" value="' + (meta.weight || '') + '" /></label>' +
+      '<label class="modal-label">Blood group' +
+      '<select class="modal-input" id="eBlood">' +
+      ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(function (bg) {
+        return opt(bg, bg, bg === meta.blood);
+      }).join('') +
+      '</select>' +
+      '</label>' +
+      '<label class="modal-label" style="grid-column:1/-1">Medical history<input class="modal-input" id="eHistory" value="' + (meta.history || '').replace(/"/g, '&quot;') + '" /></label>' +
       '</div>' +
       '<p class="modal-error" id="eError"></p>';
 
     createModal('✎ Edit Patient', body, function (overlay) {
-      var name    = overlay.querySelector('#eName').value.trim();
-      var age     = overlay.querySelector('#eAge').value.trim();
-      var gender  = overlay.querySelector('#eGender').value;
-      var weight  = overlay.querySelector('#eWeight').value.trim();
-      var blood   = overlay.querySelector('#eBlood').value;
+      var name = overlay.querySelector('#eName').value.trim();
+      var age = overlay.querySelector('#eAge').value.trim();
+      var gender = overlay.querySelector('#eGender').value;
+      var weight = overlay.querySelector('#eWeight').value.trim();
+      var blood = overlay.querySelector('#eBlood').value;
       var history = overlay.querySelector('#eHistory').value.trim();
-      var err     = overlay.querySelector('#eError');
+      var err = overlay.querySelector('#eError');
 
       if (!name) { err.textContent = 'Please enter the patient\'s full name.'; return false; }
 
@@ -527,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var badgesRow = card.querySelector('.badges-row');
       if (badgesRow) {
         badgesRow.innerHTML =
-          (age    ? '<span class="info-badge">🎂 ' + age + ' yrs</span>' : '') +
+          (age ? '<span class="info-badge">🎂 ' + age + ' yrs</span>' : '') +
           '<span class="info-badge">' + genderIcon + ' ' + gender + '</span>' +
           (weight ? '<span class="info-badge">⚖ ' + weight + ' kg</span>' : '') +
           '<span class="info-badge">🩸 ' + blood + '</span>';
@@ -575,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var rows = card.querySelectorAll('tbody tr');
     var records = [];
-    var months = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+    var months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
 
     rows.forEach(function (tr) {
       var cells = tr.querySelectorAll('td');
@@ -585,21 +591,21 @@ document.addEventListener('DOMContentLoaded', function () {
       if (parts.length !== 3) return;
       var iso = parts[2] + '-' + String(months[parts[1]] + 1).padStart(2, '0') + '-' + String(parts[0]).padStart(2, '0');
       var fasting = cells[1] ? cells[1].textContent.trim() : '';
-      var after   = cells[2] ? cells[2].textContent.trim() : '';
-      var bpMorn  = cells[3] ? cells[3].textContent.trim() : '';
-      var bpEve   = cells[4] ? cells[4].textContent.trim() : '';
+      var after = cells[2] ? cells[2].textContent.trim() : '';
+      var bpMorn = cells[3] ? cells[3].textContent.trim() : '';
+      var bpEve = cells[4] ? cells[4].textContent.trim() : '';
       records.push({
         date: iso,
         fasting: fasting === '—' ? '' : fasting,
-        after:   after   === '—' ? '' : after,
-        bpMorn:  bpMorn  === '—' ? '' : bpMorn,
-        bpEve:   bpEve   === '—' ? '' : bpEve
+        after: after === '—' ? '' : after,
+        bpMorn: bpMorn === '—' ? '' : bpMorn,
+        bpEve: bpEve === '—' ? '' : bpEve
       });
     });
 
     var nameEl = card.querySelector('.patient-name strong');
     var historyEl = card.querySelector('.patient-history p');
-    getPatient(store, id).meta = { name: nameEl ? nameEl.textContent.trim() : '' , history: historyEl ? historyEl.textContent.trim() : '' };
+    getPatient(store, id).meta = { name: nameEl ? nameEl.textContent.trim() : '', history: historyEl ? historyEl.textContent.trim() : '' };
     getPatient(store, id).records = records;
     saveStore(store);
   }
@@ -635,18 +641,18 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   if (!document.querySelector('.sl-grid')) return;
 
-  var cards   = Array.from(document.querySelectorAll('.sl-card'));
-  var search  = document.getElementById('slSearch');
+  var cards = Array.from(document.querySelectorAll('.sl-card'));
+  var search = document.getElementById('slSearch');
   var filters = document.querySelectorAll('.sl-filter');
-  var empty   = document.getElementById('slEmpty');
-  var active  = 'all';
+  var empty = document.getElementById('slEmpty');
+  var active = 'all';
 
   function filterCards() {
     var q = search.value.trim().toLowerCase();
     var any = false;
     cards.forEach(function (card) {
       var specialty = card.dataset.specialty || '';
-      var text      = card.textContent.toLowerCase();
+      var text = card.textContent.toLowerCase();
       var matchFilter = active === 'all' || specialty === active;
       var matchSearch = !q || text.includes(q);
       var show = matchFilter && matchSearch;
@@ -696,49 +702,49 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.className = 'modal-overlay';
     overlay.innerHTML =
       '<div class="modal-box login-box">' +
-        '<div class="modal-head">' +
-          '<h3>👋 Welcome back</h3>' +
-          '<button class="modal-close" id="loginClose">✕</button>' +
-        '</div>' +
-        '<div class="modal-body">' +
+      '<div class="modal-head">' +
+      '<h3>👋 Welcome back</h3>' +
+      '<button class="modal-close" id="loginClose">✕</button>' +
+      '</div>' +
+      '<div class="modal-body">' +
 
-          '<div class="login-tabs" id="loginTabs">' +
-            '<button type="button" class="login-tab active" data-role="patient">🧑 Patient</button>' +
-            '<button type="button" class="login-tab" data-role="doctor">🩺 Doctor / Caregiver</button>' +
-          '</div>' +
+      '<div class="login-tabs" id="loginTabs">' +
+      '<button type="button" class="login-tab active" data-role="patient">🧑 Patient</button>' +
+      '<button type="button" class="login-tab" data-role="doctor">🩺 Doctor / Caregiver</button>' +
+      '</div>' +
 
-          '<div class="modal-grid" style="grid-template-columns:1fr; gap:0.85rem; margin-top:1.1rem;">' +
-            '<label class="modal-label">' +
-              'Email or phone number' +
-              '<input class="modal-input" id="loginId" type="text" placeholder="name@example.com" autocomplete="username" />' +
-            '</label>' +
-            '<label class="modal-label">' +
-              'Password' +
-              '<input class="modal-input" id="loginPass" type="password" placeholder="Enter your password" autocomplete="current-password" />' +
-            '</label>' +
-          '</div>' +
+      '<div class="modal-grid" style="grid-template-columns:1fr; gap:0.85rem; margin-top:1.1rem;">' +
+      '<label class="modal-label">' +
+      'Email or phone number' +
+      '<input class="modal-input" id="loginId" type="text" placeholder="name@example.com" autocomplete="username" />' +
+      '</label>' +
+      '<label class="modal-label">' +
+      'Password' +
+      '<input class="modal-input" id="loginPass" type="password" placeholder="Enter your password" autocomplete="current-password" />' +
+      '</label>' +
+      '</div>' +
 
-          '<div class="login-row">' +
-            '<label class="login-remember">' +
-              '<input type="checkbox" id="loginRemember" /> Remember me' +
-            '</label>' +
-            '<a href="#" class="login-forgot" id="loginForgot">Forgot password?</a>' +
-          '</div>' +
+      '<div class="login-row">' +
+      '<label class="login-remember">' +
+      '<input type="checkbox" id="loginRemember" /> Remember me' +
+      '</label>' +
+      '<a href="#" class="login-forgot" id="loginForgot">Forgot password?</a>' +
+      '</div>' +
 
-          '<p class="modal-error" id="loginError"></p>' +
+      '<p class="modal-error" id="loginError"></p>' +
 
-          '<div class="login-divider"><span>or continue with</span></div>' +
+      '<div class="login-divider"><span>or continue with</span></div>' +
 
-          '<div class="login-social">' +
-            '<button type="button" class="login-social-btn">🔵 Google</button>' +
-            '<button type="button" class="login-social-btn">📘 Facebook</button>' +
-          '</div>' +
+      '<div class="login-social">' +
+      '<button type="button" class="login-social-btn">🔵 Google</button>' +
+      '<button type="button" class="login-social-btn">📘 Facebook</button>' +
+      '</div>' +
 
-        '</div>' +
-        '<div class="modal-foot login-foot">' +
-          '<span class="login-signup">New to GlucoCare? <a href="#" id="loginSignup">Create an account</a></span>' +
-          '<button class="primary-action modal-submit" id="loginSubmit">Login</button>' +
-        '</div>' +
+      '</div>' +
+      '<div class="modal-foot login-foot">' +
+      '<span class="login-signup">New to GlucoCare? <a href="#" id="loginSignup">Create an account</a></span>' +
+      '<button class="primary-action modal-submit" id="loginSubmit">Login</button>' +
+      '</div>' +
       '</div>';
 
     document.body.appendChild(overlay);
@@ -776,9 +782,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Submit */
     overlay.querySelector('#loginSubmit').addEventListener('click', function () {
-      var id   = overlay.querySelector('#loginId').value.trim();
+      var id = overlay.querySelector('#loginId').value.trim();
       var pass = overlay.querySelector('#loginPass').value.trim();
-      var err  = overlay.querySelector('#loginError');
+      var err = overlay.querySelector('#loginError');
       var role = overlay.querySelector('.login-tab.active').dataset.role;
 
       if (!id) { err.textContent = 'Please enter your email or phone number.'; return; }
