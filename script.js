@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   if (!document.querySelector('.multi-profile-grid')) return;
 
-  var STORAGE_KEY = 'glucocare_patients_v3';
+  var STORAGE_KEY = 'glucocare_patients_v4';
   var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   /* ── localStorage helpers (placeholder persistence layer) ── */
@@ -605,7 +605,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var nameEl = card.querySelector('.patient-name strong');
     var historyEl = card.querySelector('.patient-history p');
-    getPatient(store, id).meta = { name: nameEl ? nameEl.textContent.trim() : '', history: historyEl ? historyEl.textContent.trim() : '' };
+    var badges = card.querySelectorAll('.info-badge');
+    var age = '', gender = '', weight = '', blood = '';
+    badges.forEach(function (b) {
+      var txt = b.textContent.trim();
+      if (txt.includes('yrs')) age = txt.replace(/[^0-9]/g, '');
+      else if (txt.includes('Male')) gender = 'Male';
+      else if (txt.includes('Female')) gender = 'Female';
+      else if (txt.includes('kg')) weight = txt.replace(/[^0-9.]/g, '');
+      else if (txt.match(/^🩸/)) blood = txt.replace('🩸', '').trim();
+    });
+    getPatient(store, id).meta = {
+      name: nameEl ? nameEl.textContent.trim() : '',
+      age: age,
+      gender: gender,
+      weight: weight,
+      blood: blood,
+      history: historyEl ? historyEl.textContent.trim() : ''
+    };
     getPatient(store, id).records = records;
     saveStore(store);
   }
