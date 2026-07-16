@@ -2887,6 +2887,164 @@ textarea {
   margin: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ROW ACTIONS — per-record edit / delete menu
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Actions column */
+.records-table th.row-actions-header,
+.records-table td.row-actions-cell {
+  width: 44px;
+  min-width: 44px;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+
+.records-table th.row-actions-header {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* Container keeps the popup anchored */
+.row-actions-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Three-dot button */
+.row-actions-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  color: #94a3b8;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.row-actions-btn:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+.row-actions-btn.open {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+/* Dropdown popup */
+.row-actions-menu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 130px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  padding: 4px;
+  opacity: 0;
+  transform: scale(0.92) translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+}
+.row-actions-menu.open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.row-actions-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  font-size: 0.82rem;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.row-actions-menu button:hover {
+  background: #f1f5f9;
+}
+.row-actions-menu button.row-delete-btn {
+  color: #ef4444;
+}
+.row-actions-menu button.row-delete-btn:hover {
+  background: #fef2f2;
+}
+
+/* ── Confirm delete overlay (inline) ────────── */
+.row-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.45);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rcFadeIn .2s;
+}
+@keyframes rcFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.row-confirm-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  max-width: 360px;
+  width: 92%;
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  text-align: center;
+}
+.row-confirm-box p {
+  font-size: 0.92rem;
+  color: #334155;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.row-confirm-box .confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.row-confirm-box .confirm-actions button {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.row-confirm-box .confirm-cancel {
+  background: #f8fafc;
+  color: #475569;
+}
+.row-confirm-box .confirm-cancel:hover {
+  background: #f1f5f9;
+}
+.row-confirm-box .confirm-delete {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+.row-confirm-box .confirm-delete:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    LOGIN MODAL

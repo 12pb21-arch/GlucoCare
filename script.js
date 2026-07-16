@@ -240,6 +240,109 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ── Close any open row-action menus on outside click ── */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.row-actions-wrap')) {
+      document.querySelectorAll('.row-actions-menu.open').forEach(function (m) { m.classList.remove('open'); });
+      document.querySelectorAll('.row-actions-btn.open').forEach(function (b) { b.classList.remove('open'); });
+    }
+  });
+
+  /* ════════════════════════════════════════════════
+     EDIT RECORD
+  ════════════════════════════════════════════════ */
+  function openEditRecord(card, recordIndex) {
+    var patientId = card.dataset.patientId;
+    var store     = loadStore();
+    var patient   = getPatient(store, patientId);
+    var rec       = patient.records[recordIndex];
+    if (!rec) return;
+
+    var body =
+      '<div class="modal-grid">' +
+        '<label class="modal-label" style="grid-column:1/-1">Date<input class="modal-input" id="erDate" type="date" value="' + (rec.date || '') + '" /></label>' +
+        '<label class="modal-label">Fasting sugar (mg/dL)<input class="modal-input" id="erFasting" type="number" min="40" max="600" value="' + (rec.fasting || '') + '" /></label>' +
+        '<label class="modal-label">After breakfast (mg/dL)<input class="modal-input" id="erAfter" type="number" min="40" max="600" value="' + (rec.after || '') + '" /></label>' +
+        '<label class="modal-label">Morning BP (mmHg)<input class="modal-input" id="erBPMorn" value="' + (rec.bpMorn || '') + '" /></label>' +
+        '<label class="modal-label">Evening BP (mmHg)<input class="modal-input" id="erBPEve" value="' + (rec.bpEve || '') + '" /></label>' +
+        '<label class="modal-label" style="grid-column:1/-1">❤️ Heart rate (BPM)<input class="modal-input" id="erHeartRate" type="number" min="30" max="220" value="' + (rec.heartRate || '') + '" /></label>' +
+      '</div>' +
+      '<p class="modal-error" id="erError"></p>';
+
+    createModal('✎ Edit Health Record', body, function (overlay) {
+      var dateVal   = overlay.querySelector('#erDate').value;
+      var fasting   = overlay.querySelector('#erFasting').value.trim();
+      var after     = overlay.querySelector('#erAfter').value.trim();
+      var bpMorn    = overlay.querySelector('#erBPMorn').value.trim();
+      var bpEve     = overlay.querySelector('#erBPEve').value.trim();
+      var heartRate = overlay.querySelector('#erHeartRate').value.trim();
+      var err       = overlay.querySelector('#erError');
+
+      if (!dateVal) { err.textContent = 'Please select a date.'; return false; }
+      if (!fasting && !after && !bpMorn && !bpEve && !heartRate) {
+        err.textContent = 'Please enter at least one reading.'; return false;
+      }
+
+      // Re-read store in case it changed
+      store   = loadStore();
+      patient = getPatient(store, patientId);
+      patient.records[recordIndex] = { date: dateVal, fasting: fasting, after: after, bpMorn: bpMorn, bpEve: bpEve, heartRate: heartRate };
+      saveStore(store);
+
+      renderRecordsTable(card, patient.records);
+      refreshTodayPill();
+      return true;
+    });
+  }
+
+  /* ════════════════════════════════════════════════
+     DELETE RECORD (with styled confirm dialog)
+  ════════════════════════════════════════════════ */
+  function confirmDeleteRecord(card, recordIndex) {
+    var existing = document.querySelector('.row-confirm-overlay');
+    if (existing) existing.remove();
+
+    var patientId = card.dataset.patientId;
+    var store     = loadStore();
+    var patient   = getPatient(store, patientId);
+    var rec       = patient.records[recordIndex];
+    if (!rec) return;
+
+    var d = parseLocalDate(rec.date);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var dateStr = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+    var overlay = document.createElement('div');
+    overlay.className = 'row-confirm-overlay';
+    overlay.innerHTML =
+      '<div class="row-confirm-box">' +
+        '<p>Delete the record from <strong>' + dateStr + '</strong>?<br>This action cannot be undone.</p>' +
+        '<div class="confirm-actions">' +
+          '<button class="confirm-cancel">Cancel</button>' +
+          '<button class="confirm-delete">Delete</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+
+    function close() {
+      overlay.remove();
+    }
+
+    overlay.querySelector('.confirm-cancel').addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+    overlay.querySelector('.confirm-delete').addEventListener('click', function () {
+      store   = loadStore();
+      patient = getPatient(store, patientId);
+      patient.records.splice(recordIndex, 1);
+      saveStore(store);
+      renderRecordsTable(card, patient.records);
+      refreshTodayPill();
+      close();
+    });
+  }
+
   /* ════════════════════════════════════════════════
      RENDER: records table grouped by month
   ════════════════════════════════════════════════ */
@@ -261,6 +364,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Sort newest first
     var sorted = records.slice().sort(function (a, b) { return parseLocalDate(b.date) - parseLocalDate(a.date); });
+
+    // Build a map from record → original index so edit/delete know which entry to target
+    var recordOrigIndexMap = new Map();
+    sorted.forEach(function (r) {
+      recordOrigIndexMap.set(r, records.indexOf(r));
+    });
 
     // Group by "YYYY-M"
     var groups = {};
@@ -299,8 +408,8 @@ document.addEventListener('DOMContentLoaded', function () {
       table.className = 'records-table';
       table.innerHTML =
         '<thead>' +
-          '<tr><th>DATE</th><th>🩸 SUGAR (MG/DL)</th><th>♥ BLOOD PRESSURE (MMHG)</th></tr>' +
-          '<tr class="sub-headers"><th>DATE</th><th>FASTING</th><th>AFTER BREAKFAST</th><th>MORNING</th><th>EVENING</th><th>❤️ BPM</th></tr>' +
+          '<tr><th>DATE</th><th colspan="2">🩸 SUGAR (MG/DL)</th><th colspan="2">♥ BLOOD PRESSURE (MMHG)</th><th>❤️</th><th class="row-actions-header"></th></tr>' +
+          '<tr class="sub-headers"><th>DATE</th><th>FASTING</th><th>AFTER BREAKFAST</th><th>MORNING</th><th>EVENING</th><th>❤️ BPM</th><th class="row-actions-header"></th></tr>' +
         '</thead>' +
         '<tbody></tbody>';
 
@@ -309,6 +418,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var d = parseLocalDate(r.date);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var dateStr = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+        var origIdx = recordOrigIndexMap.get(r);
+
         var tr = document.createElement('tr');
         tr.innerHTML =
           '<td>' + dateStr + '</td>' +
@@ -316,7 +427,49 @@ document.addEventListener('DOMContentLoaded', function () {
           '<td class="' + sugarClass(Number(r.after))   + '">' + (r.after   || '—') + '</td>' +
           '<td class="' + bpClass(r.bpMorn) + '">' + (r.bpMorn || '—') + '</td>' +
           '<td class="' + bpClass(r.bpEve)  + '">' + (r.bpEve  || '—') + '</td>' +
-          '<td class="' + heartRateClass(Number(r.heartRate)) + '">' + (r.heartRate || '—') + '</td>';
+          '<td class="' + heartRateClass(Number(r.heartRate)) + '">' + (r.heartRate || '—') + '</td>' +
+          '<td class="row-actions-cell">' +
+            '<div class="row-actions-wrap">' +
+              '<button type="button" class="row-actions-btn" title="Actions">⋮</button>' +
+              '<div class="row-actions-menu">' +
+                '<button type="button" class="row-edit-btn">✎ Edit</button>' +
+                '<button type="button" class="row-delete-btn">🗑 Delete</button>' +
+              '</div>' +
+            '</div>' +
+          '</td>';
+
+        // Wire up the 3-dot menu
+        var menuBtn  = tr.querySelector('.row-actions-btn');
+        var menuDrop = tr.querySelector('.row-actions-menu');
+        menuBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          // Close all other menus first
+          document.querySelectorAll('.row-actions-menu.open').forEach(function (m) { if (m !== menuDrop) m.classList.remove('open'); });
+          document.querySelectorAll('.row-actions-btn.open').forEach(function (b) { if (b !== menuBtn) b.classList.remove('open'); });
+          var isOpen = menuDrop.classList.toggle('open');
+          menuBtn.classList.toggle('open');
+          // Position the fixed dropdown relative to the button
+          if (isOpen) {
+            var rect = menuBtn.getBoundingClientRect();
+            menuDrop.style.top  = (rect.bottom + 4) + 'px';
+            menuDrop.style.left = (rect.right - 130) + 'px'; // 130 = min-width of menu
+          }
+        });
+
+        tr.querySelector('.row-edit-btn').addEventListener('click', function (e) {
+          e.stopPropagation();
+          menuDrop.classList.remove('open');
+          menuBtn.classList.remove('open');
+          openEditRecord(card, origIdx);
+        });
+
+        tr.querySelector('.row-delete-btn').addEventListener('click', function (e) {
+          e.stopPropagation();
+          menuDrop.classList.remove('open');
+          menuBtn.classList.remove('open');
+          confirmDeleteRecord(card, origIdx);
+        });
+
         tbody.appendChild(tr);
       });
 
